@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: babalae/better-genshin-impact
+          repository: physligl/better-genshin-impact
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.x
@@ -88,7 +88,7 @@ jobs:
       # 下载构建 repo 的内容补充数据
       - uses: actions/checkout@v4
         with:
-          repository: babalae/bettergi-publish
+          repository: physligl/bettergi-publish
           path: publish
       - name: 🗜️ Extract Map
         run: |
@@ -144,7 +144,7 @@ jobs:
       - name: 📥 Download last release
         uses: robinraju/release-downloader@v1.8
         with:
-          repository: "babalae/better-genshin-impact"
+          repository: "physligl/better-genshin-impact"
           latest: true
           fileName: "BetterGI_v*.7z"
           out-file-path: 'last'
@@ -160,7 +160,7 @@ jobs:
       - name: 📦 Pack kachina-builder
         run: |
           cd dist
-          ..\kachina-builder.exe gen -j 6 -i BetterGI -m metadata.json -o hashed -r babalae/bettergi -t ${{ needs.build_dist.outputs.version }} --diff-vers ..\last\BetterGI --diff-ignore *[.txt,.onnx] -u .\BetterGI\BetterGI.update.exe
+          ..\kachina-builder.exe gen -j 6 -i BetterGI -m metadata.json -o hashed -r physligl/bettergi -t ${{ needs.build_dist.outputs.version }} --diff-vers ..\last\BetterGI --diff-ignore *[.txt,.onnx] -u .\BetterGI\BetterGI.update.exe
           ..\kachina-builder.exe pack -c ../kachina.config.json -m metadata.json -d hashed -o BetterGI.Install.${{ needs.build_dist.outputs.version }}.exe
       - uses: actions/upload-artifact@v4
         with:
